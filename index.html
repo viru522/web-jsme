@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>JSME - Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #b21f2d;
+      --text: #222;
+      --muted: #666;
+      --bg: #fafafa;
+      --card-bg: #fff;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+      background: var(--bg);
+      font-family: "Roboto", sans-serif;
+      color: var(--text);
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--primary);
+      padding: 0.7rem 1rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff !important;
+    }
+
+    .navbar-brand .logo {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 18px;
+      border-radius: 10px;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(255, 255, 255, 0.25);
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin-right: 8px;
+      border-radius: 6px;
+      padding: 8px 12px !important;
+      transition: background 0.2s ease-in-out;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin: 60px 0 40px;
+      padding: 0 15px;
+    }
+
+    .hero-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-bg);
+      color: var(--primary);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 26px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-logo:hover {
+      transform: rotate(8deg) scale(1.05);
+    }
+
+    .hero h1 {
+      margin-top: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.3px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .current-date {
+      font-size: 13px;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    /* Summary Grid */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 0 auto 40px;
+      max-width: 1100px;
+      padding: 0 20px;
+    }
+
+    .summary-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 24px 18px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(178, 31, 45, 0.2);
+    }
+
+    .summary-card .icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .summary-card h5 {
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .summary-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .count-badge {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 2px 8px;
+    }
+
+    /* Floating Add Buttons */
+    .fab-container {
+      position: fixed;
+      bottom: 30px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .fab-container a {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease;
+    }
+
+    .fab-container a:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
+      text-align: center;
+      color: #999;
+      margin: 50px 0 20px;
+      font-size: 14px;
+    }
+
+    /* Responsive Fix */
+    @media (max-width: 576px) {
+      .navbar-brand .logo {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+      }
+
+      .hero-logo {
+        width: 80px;
+        height: 80px;
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <div class="logo">JSME</div>
+        <div>
+          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
+        </div>
+      </a>
+
+      <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
+          <li class="nav-item"><a class="nav-link active" href="../Winding/Stator_List.html">🌀 Stator</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-logo">JSME</div>
+    <h1>Jai Santoshi Mata Electrical</h1>
+    <p>Admin Panel — Manage Billing, Inventory, Winding, and Services</p>
+    <div class="current-date" id="currentDate"></div>
+  </section>
+
+  <!-- Summary Section -->
+  <section class="summary-grid" id="summaryGrid">
+    <a href="Dashboard/index.html" class="summary-card">
+      <div class="icon">🏠</div>
+      <h5>Dashboard</h5>
+      <p>Overview and quick metrics</p>
+    </a>
+
+    <a href="Customer/Customer_List.html" class="summary-card">
+      <div class="icon">👥</div>
+      <h5>Customers</h5>
+      <p>View or add customer data</p>
+    </a>
+
+    <a href="Billing/Billing_List.html" class="summary-card">
+      <div class="icon">🧾</div>
+      <h5>Billing</h5>
+      <p>Manage and create invoices</p>
+    </a>
+
+    <a href="Winding/Data_List.html" class="summary-card">
+      <div class="icon">⚙️</div>
+      <h5>Winding</h5>
+      <p>Track stator winding details</p>
+    </a>
+
+    <a href="Winding/Stator_List.html" class="summary-card">
+      <div class="icon">🌀</div>
+      <h5>Stator</h5>
+      <p>Maintain stator type records</p>
+    </a>
+
+    <a href="Inventory/Stock_List.html" class="summary-card">
+      <div class="icon">📦</div>
+      <h5>Stock</h5>
+      <p>Inventory and stock control</p>
+    </a>
+
+    <a href="Inventory/Purchase_List.html" class="summary-card">
+      <div class="icon">🛒</div>
+      <h5>Purchase</h5>
+      <p>Record incoming goods</p>
+    </a>
+
+    <a href="Inventory/Sale_List.html" class="summary-card">
+      <div class="icon">💼</div>
+      <h5>Sales</h5>
+      <p>Track product sales data</p>
+    </a>
+
+    <a href="Auth/System.html" class="summary-card">
+      <div class="icon">⚙️</div>
+      <h5>Settings</h5>
+      <p>System preferences & updates</p>
+    </a>
+  </section>
+
+  <!-- Floating Quick Action Buttons -->
+  <div class="fab-container">
+    <a href="../Customer/Customer_Entry.html" title="Add Customer">👤</a>
+    <a href="../Billing/Billing_Entry.html" title="Create Bill">🧾</a>
+    <a href="../Winding/Data_Entry.html" title="Add Winding">⚙️</a>
+  </div>
+
+  <footer>© 2008 Jai Santoshi Mata Electrical</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Show current date
+      const d = new Date();
+      document.getElementById("currentDate").textContent =
+        d.toLocaleDateString("en-IN", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        });
+
+      // Simulate live data counts
+      const counts = {
+        Customers: 123,
+        Billing: 87,
+        Winding: 32,
+        Stator: 15,
+        Stock: 142,
+        Purchase: 64,
+        Sales: 98
+      };
+
+      document.querySelectorAll(".summary-card").forEach(card => {
+        const title = card.querySelector("h5").innerText.trim();
+        if (counts[title]) {
+          const badge = document.createElement("div");
+          badge.className = "count-badge";
+          badge.textContent = counts[title];
+          card.appendChild(badge);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

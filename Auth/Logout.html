@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>JSME Portal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root {
+      --primary: #b21f2d;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fff, #ffeaea);
+      font-family: "Roboto", sans-serif;
+    }
+
+    .splash {
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 28px;
+      box-shadow: 0 8px 25px rgba(178, 31, 45, 0.3);
+      margin-bottom: 18px;
+    }
+
+    .text {
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border: 3px solid #fff;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      margin: 20px auto;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="splash">
+    <div class="logo">JSME</div>
+    <div class="text">Jai Santoshi Mata Electrical</div>
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    // Redirect to Login after short delay
+    setTimeout(() => {
+      window.location.href = '../Auth/Login.html';
+    }, 1500);
+  </script>
+</body>
+
+</html>

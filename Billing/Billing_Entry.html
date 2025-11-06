@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Create Bill - JSME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #b21f2d;
+    }
+
+    body {
+      background: #fafafa;
+      margin: 0;
+      font-family: "Roboto", sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--primary);
+      padding: 0.7rem 1.2rem;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff !important;
+    }
+
+    .navbar-brand .logo {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 18px;
+      border-radius: 10px;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(255, 255, 255, 0.25);
+    }
+
+    .navbar-brand small {
+      display: block;
+      font-size: 12px;
+      color: #ffeaea;
+      line-height: 1;
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin-right: 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      padding: 8px 12px !important;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .navbar-nav .nav-link.active {
+      background: #fff;
+      color: var(--primary) !important;
+      font-weight: 600;
+    }
+
+    /* Billing Page Layout */
+    .bill-container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .bill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .bill-header h4 {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .table thead th {
+      background: #fbeaea;
+      color: #333;
+      font-weight: 600;
+      text-align: left;
+      padding: 8px;
+    }
+
+    .table tbody td {
+      padding: 8px;
+      border-top: 1px solid #eee;
+      vertical-align: middle;
+    }
+
+    .table input {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 14px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 8px 14px;
+      transition: 0.2s;
+    }
+
+    .btn-danger {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      opacity: 0.9;
+    }
+
+    .btn-outline-danger {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline-danger:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-sm {
+      padding: 4px 8px;
+      font-size: 13px;
+    }
+
+    .sticky-summary {
+      position: sticky;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      background: #fff;
+      padding: 14px 16px;
+      border-top: 1px solid #eee;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+      margin-top: 10px;
+    }
+
+    .summary-box {
+      background: #fff9f9;
+      border: 1px solid #f2dede;
+      border-radius: 10px;
+      padding: 10px 14px;
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .summary-box div {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+
+    .summary-box .total {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .bill-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .sticky-summary {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <div class="logo">JSME</div>
+        <div style="line-height:1;">
+          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
+        </div>
+      </a>
+
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
+
+          <!-- Stator Section -->
+          <li class="nav-item"><a class="nav-link active" href="../Winding/Stator_List.html">🌀 Stator</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Billing Form -->
+  <div class="bill-container">
+    <div class="card">
+      <div class="bill-header">
+        <h4>🧾 Create New Bill</h4>
+        <a href="Billing_List.html" class="btn btn-outline-danger">View All Bills</a>
+      </div>
+
+      <form id="billingForm">
+        <div class="form-grid">
+          <div>
+            <label>Customer *</label>
+            <input class="form-control" name="customerName" placeholder="Customer Name" required>
+          </div>
+          <div>
+            <label>Phone</label>
+            <input class="form-control" name="customerPhone" placeholder="Phone Number">
+          </div>
+          <div>
+            <label>Billing Date</label>
+            <input type="date" name="billingDate" class="form-control">
+          </div>
+          <div>
+            <label>Payment Mode</label>
+            <select name="paymentMode" class="form-control">
+              <option value="Cash">Cash</option>
+              <option value="UPI">UPI</option>
+              <option value="Card">Card</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="table-responsive">
+          <table class="table" id="itemsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><input class="item-name" placeholder="Item Name"></td>
+                <td><input class="item-cat" placeholder="Category"></td>
+                <td><input class="qty" type="number" value="1"></td>
+                <td><input class="rate" type="number" value="0"></td>
+                <td class="itemTotal text-end">0.00</td>
+                <td><button type="button" class="btn btn-sm btn-danger removeRow">✖</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button type="button" id="addRow" class="btn btn-outline-danger mb-2">+ Add Item</button>
+
+        <!-- Offers & Coupons Section -->
+        <div class="card mt-3">
+          <h6 class="text-primary mb-2">🎁 Offers & Coupons</h6>
+          <div class="row g-3 align-items-end">
+            <div class="col-md-6">
+              <label class="form-label">Available Offers</label>
+              <select id="offerSelect" class="form-control">
+                <option value="">-- Select Offer --</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Discount Type</label>
+              <select id="discountType" class="form-control">
+                <option value="percent">%</option>
+                <option value="flat">₹</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Discount Value</label>
+              <input type="number" id="discountValue" class="form-control" value="0" min="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky-summary">
+          <div class="summary-box">
+            <div><span>Subtotal:</span> <span id="subtotal">0.00</span></div>
+            <div><span>GST (18%):</span> <span id="gst">0.00</span></div>
+            <div class="total"><span>Total:</span> <span id="grandTotal">0.00</span></div>
+          </div>
+          <button class="btn btn-danger" type="submit">💾 Generate Bill</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // --- Basic guards ---
+  const form = document.getElementById("billingForm");
+  const itemsTable = document.getElementById("itemsTable");
+  const tbody = itemsTable ? itemsTable.querySelector("tbody") : null;
+  const addRowBtn = document.getElementById("addRow");
+  const subtotalEl = document.getElementById("subtotal");
+  const gstEl = document.getElementById("gst");
+  const grandTotalEl = document.getElementById("grandTotal");
+  const stickySummary = document.querySelector(".sticky-summary");
+  const summaryBox = document.querySelector(".summary-box");
+
+  if (!form || !tbody || !subtotalEl || !gstEl || !grandTotalEl) {
+    console.error("Billing form: required elements missing. Check IDs: billingForm, itemsTable tbody, subtotal, gst, grandTotal.");
+    return;
+  }
+
+  // --- Safe parse editBill ---
+  let editBill = null;
+  try { editBill = JSON.parse(localStorage.getItem("editBill")); } catch (err) { editBill = null; }
+
+  const today = new Date().toISOString().split("T")[0];
+  if (!form.billingDate) {
+    console.warn("billingDate input not found.");
+  } else {
+    form.billingDate.value = today;
+  }
+
+  // --- Ensure GST toggle exists; if not create it in sticky-summary before summary-box ---
+  let gstToggle = document.getElementById("applyGst");
+  if (!gstToggle && stickySummary && summaryBox) {
+    const div = document.createElement("div");
+    div.className = "form-check mb-2";
+    div.innerHTML = `
+      <input class="form-check-input" type="checkbox" id="applyGst" checked>
+      <label class="form-check-label" for="applyGst">Apply 18% GST</label>
+    `;
+    stickySummary.insertBefore(div, summaryBox);
+    gstToggle = document.getElementById("applyGst");
+  }
+  // final guard
+  if (!gstToggle) {
+    console.warn("GST toggle not present and could not be created.");
+  }
+
+  // --- Offers/Coupons (safe) ---
+  const offerSelect = document.getElementById("offerSelect");
+  const discountType = document.getElementById("discountType");
+  const discountValue = document.getElementById("discountValue");
+  const offers = JSON.parse(localStorage.getItem("offers") || "[]");
+  if (offerSelect && offers.length) {
+    offers.forEach(o => {
+      const opt = document.createElement("option");
+      opt.value = o.id;
+      opt.textContent = `${o.title} (${o.tag || 'Offer'})`;
+      offerSelect.appendChild(opt);
+    });
+  }
+
+  // Keep track of selected offer
+  let selectedOffer = null;
+  if (offerSelect) {
+    offerSelect.addEventListener("change", e => {
+      const id = Number(e.target.value);
+      selectedOffer = offers.find(o => o.id === id) || null;
+      if (selectedOffer && /\d+%/.test(selectedOffer.title)) {
+        const pct = selectedOffer.title.match(/\d+/)[0];
+        if (discountType) discountType.value = "percent";
+        if (discountValue) discountValue.value = pct;
+      } else {
+        if (discountType) discountType.value = "flat";
+        if (discountValue) discountValue.value = 0;
+      }
+      updateTotals();
+    });
+  }
+
+  // --- createRow helper ---
+  function createRow(index, data = {}) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="text-muted align-middle">${index}</td>
+      <td><input class="form-control form-control-sm item-name" value="${(data.itemName||"").replace(/"/g,'&quot;')}" placeholder="Item Name"></td>
+      <td><input class="form-control form-control-sm item-cat" value="${(data.category||"").replace(/"/g,'&quot;')}" placeholder="Category"></td>
+      <td><input class="form-control form-control-sm qty" type="number" step="any" value="${data.qty ?? 1}"></td>
+      <td><input class="form-control form-control-sm rate" type="number" step="any" value="${data.rate ?? 0}"></td>
+      <td class="itemTotal text-end align-middle">${(data.total || 0).toFixed(2)}</td>
+      <td class="text-center"><button type="button" class="btn btn-sm btn-danger removeRow">✖</button></td>
+    `;
+    return tr;
+  }
+
+  // --- updateTotals (single robust implementation) ---
+  function updateTotals() {
+    // recalc subtotal from itemTotal cells
+    let subtotal = 0;
+    tbody.querySelectorAll(".itemTotal").forEach(cell => {
+      subtotal += parseFloat(cell.textContent) || 0;
+    });
+
+    // discount
+    let discount = 0;
+    const val = (discountValue && discountValue.value) ? parseFloat(discountValue.value) || 0 : 0;
+    if (discountType && discountType.value === "percent") discount = subtotal * (val / 100);
+    else discount = val || 0;
+
+    const discountedSubtotal = Math.max(subtotal - discount, 0);
+
+    // gst
+    const gstApplied = gstToggle ? gstToggle.checked : false;
+    const gstAmount = gstApplied ? discountedSubtotal * 0.18 : 0;
+    const total = discountedSubtotal + gstAmount;
+
+    subtotalEl.textContent = subtotal.toFixed(2);
+    gstEl.textContent = gstAmount.toFixed(2);
+    grandTotalEl.textContent = total.toFixed(2);
+
+    // store discount for saving
+    form.dataset.discount = discount.toFixed(2);
+  }
+
+  // attach row add/remove and cell change handlers safely
+  if (addRowBtn) {
+    addRowBtn.addEventListener("click", () => {
+      const row = createRow(tbody.rows.length + 1);
+      tbody.appendChild(row);
+      updateTotals();
+    });
+  }
+
+  // remove row
+  tbody.addEventListener("click", (e) => {
+    if (e.target && e.target.classList.contains("removeRow")) {
+      e.target.closest("tr").remove();
+      // reindex rows
+      Array.from(tbody.rows).forEach((r, idx) => {
+        const cell = r.querySelector("td");
+        if (cell) cell.textContent = idx + 1;
+      });
+      updateTotals();
+    }
+  });
+
+  // qty/rate input change => recalc line total
+  tbody.addEventListener("input", (e) => {
+    const el = e.target;
+    if (el.classList && (el.classList.contains("qty") || el.classList.contains("rate"))) {
+      const tr = el.closest("tr");
+      const qty = parseFloat(tr.querySelector(".qty").value) || 0;
+      const rate = parseFloat(tr.querySelector(".rate").value) || 0;
+      const total = qty * rate;
+      tr.querySelector(".itemTotal").textContent = total.toFixed(2);
+      updateTotals();
+    }
+  });
+
+  if (gstToggle) gstToggle.addEventListener("change", updateTotals);
+  if (discountValue) discountValue.addEventListener("input", updateTotals);
+  if (discountType) discountType.addEventListener("change", updateTotals);
+
+  // --- Prefill when editing ---
+  if (editBill && typeof editBill === "object") {
+    try {
+      // ensure required form inputs are present before assigning
+      if (form.customerName) form.customerName.value = editBill.customerName || "";
+      if (form.customerPhone) form.customerPhone.value = editBill.customerPhone || "";
+      if (form.billingDate) form.billingDate.value = editBill.billingDate || today;
+      if (form.paymentMode) form.paymentMode.value = editBill.paymentMode || "Cash";
+      if (gstToggle) gstToggle.checked = editBill.applyGst !== false;
+
+      // clear existing rows then append from editBill
+      tbody.innerHTML = "";
+      (editBill.items || []).forEach((item, idx) => {
+        const row = createRow(idx + 1, item);
+        tbody.appendChild(row);
+      });
+
+      updateTotals();
+
+      // change submit button text to indicate update
+      const submitBtn = form.querySelector("button[type='submit']");
+      if (submitBtn) submitBtn.textContent = "✏️ Update Bill";
+    } catch (err) {
+      console.error("Error pre-filling editBill:", err);
+    }
+  } else {
+    // if not editing and no rows exist, add one empty row
+    if (tbody.rows.length === 0) tbody.appendChild(createRow(1));
+    updateTotals();
+  }
+
+  // --- Bill number helper (fixed padStart usage) ---
+  function nextBillNo(billList) {
+    let nextBillNumber = 1;
+    if (billList && billList.length > 0) {
+      // attempt to parse numeric suffix from last saved billNo
+      const lastBill = billList[billList.length - 1];
+      const lastNum = parseInt(String(lastBill.billNo || "").replace(/\D/g, ""), 10) || 0;
+      nextBillNumber = lastNum + 1;
+    }
+    // pad to 4 digits e.g. BILL-0001
+    return `BILL-${String(nextBillNumber).padStart(4, "0")}`;
+  }
+
+  // --- Submit handler (create or update) ---
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const customerName = form.customerName ? form.customerName.value.trim() : "";
+    if (!customerName) { alert("Customer name is required."); return; }
+
+    // collect items
+    const items = [];
+    tbody.querySelectorAll("tr").forEach(tr => {
+      const itemName = (tr.querySelector(".item-name")?.value || "").trim();
+      const category = (tr.querySelector(".item-cat")?.value || "").trim();
+      const qty = parseFloat(tr.querySelector(".qty")?.value) || 0;
+      const rate = parseFloat(tr.querySelector(".rate")?.value) || 0;
+      const total = qty * rate;
+      if (itemName) items.push({ itemName, category, qty, rate, total });
+    });
+
+    if (items.length === 0) { alert("Please add at least one item."); return; }
+
+    let billList = JSON.parse(localStorage.getItem("billList") || "[]");
+
+    const subtotal = parseFloat(subtotalEl.textContent) || 0;
+    const gst = parseFloat(gstEl.textContent) || 0;
+    const total = parseFloat(grandTotalEl.textContent) || 0;
+
+    const billData = {
+      id: editBill ? editBill.id : Date.now(),
+      billNo: editBill ? editBill.billNo : nextBillNo(billList),
+      customerName,
+      customerPhone: form.customerPhone ? form.customerPhone.value.trim() : "",
+      billingDate: form.billingDate ? form.billingDate.value : today,
+      paymentMode: form.paymentMode ? form.paymentMode.value : "Cash",
+      applyGst: gstToggle ? gstToggle.checked : false,
+      items,
+      subtotal,
+      gst,
+      total,
+      status: editBill ? (editBill.status || "Unpaid") : "Unpaid"
+    };
+
+    if (editBill) {
+      const idx = billList.findIndex(b => b.id === editBill.id);
+      if (idx !== -1) billList[idx] = billData;
+      localStorage.removeItem("editBill");
+      alert("✅ Bill updated successfully!");
+    } else {
+      billList.push(billData);
+      alert("✅ Bill saved successfully!");
+    }
+
+    localStorage.setItem("billList", JSON.stringify(billList));
+    localStorage.setItem("lastSavedBill", JSON.stringify(billData));
+    // go back to list
+    window.location.href = "Billing_List.html";
+  });
+
+  // --- PDF generation function kept as-is (no changes required) ---
+  function generatePDF(bill) {
+    // (keep your existing PDF logic here)
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+
+    let y = 20;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text("JSM Electricals", 15, y);
+    y += 8;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.text("Invoice", 15, y);
+    y += 10;
+
+    doc.setFontSize(11);
+    doc.text(`Bill No: ${bill.billNo}`, 15, y); y += 6;
+    doc.text(`Date: ${bill.billingDate}`, 15, y); y += 6;
+    doc.text(`Customer: ${bill.customerName}`, 15, y); y += 6;
+    doc.text(`Phone: ${bill.customerPhone || "-"}`, 15, y); y += 6;
+    doc.text(`Payment Mode: ${bill.paymentMode}`, 15, y);
+    y += 10;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text("Item", 15, y);
+    doc.text("Qty", 100, y);
+    doc.text("Rate (₹)", 130, y);
+    doc.text("Total (₹)", 170, y);
+    y += 5;
+    doc.line(15, y, 195, y);
+    y += 6;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    bill.items.forEach(it => {
+      doc.text(it.itemName, 15, y);
+      doc.text(String(it.qty), 102, y, { align: "right" });
+      doc.text(it.rate.toFixed(2), 140, y, { align: "right" });
+      doc.text(it.total.toFixed(2), 185, y, { align: "right" });
+      y += 6;
+    });
+
+    y += 6;
+    doc.line(15, y, 195, y);
+    y += 6;
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Subtotal:", 140, y);
+    doc.text(`₹${bill.subtotal.toFixed(2)}`, 185, y, { align: "right" });
+    y += 6;
+
+    if (bill.applyGst) {
+      doc.text("GST (18%):", 140, y);
+      doc.text(`₹${bill.gst.toFixed(2)}`, 185, y, { align: "right" });
+      y += 6;
+    }
+
+    doc.setFontSize(12);
+    doc.text("Grand Total:", 140, y);
+    doc.text(`₹${bill.total.toFixed(2)}`, 185, y, { align: "right" });
+    y += 10;
+
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(10);
+    doc.text("Thank you for your business!", 15, y);
+    y += 6;
+    doc.text("Authorized Signature ____________________", 15, y);
+
+    doc.save(`${bill.billNo}.pdf`);
+  }
+
+}); // DOMContentLoaded end
+</script>
+
+
+  <!-- Include jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
