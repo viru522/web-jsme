@@ -13,11 +13,10 @@
     }
 
     body {
-      background: #f9f9f9;
+      background: #fafafa;
       font-family: "Roboto", sans-serif;
     }
 
-    /* Navbar */
     .navbar {
       background: var(--primary);
       padding: .8rem 1.2rem;
@@ -55,31 +54,33 @@
       color: var(--primary) !important;
     }
 
-    /* Page layout */
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
-    }
-
     .card {
-      border-radius: 12px;
-      padding: 20px;
       background: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .table th {
-      background: #fff3f3;
-      color: #333;
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .btn-danger {
       background: var(--primary);
       border: none;
+      font-weight: 600;
     }
 
-    .btn-danger:hover {
-      opacity: 0.9;
+    .table th {
+      background: #fbeaea;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #777;
+      padding: 2rem;
+      font-size: 15px;
+    }
+
+    .search-bar input {
+      border-radius: 10px;
+      border: 1px solid #ddd;
     }
   </style>
 </head>
@@ -87,63 +88,57 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <div class="logo">JSME</div>
-        <div style="line-height:1;">
-          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
-        </div>
-      </a>
-
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Winding/Stator_List.html">🌀 Stator</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
-          <li class="nav-item"><a class="nav-link active" href="../Coupons/Coupon_List.html">🎟️ Coupons</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
-        </ul>
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/main/index.html">
+      <div>
+        <img class="logo" src="/main/Asset/img-123.png" id="navbarLogo" width="50vh" height="50%" alt="Logo">
       </div>
-    </div>
-  </nav>
+      <span id="navbarName" class="fw-bold fs-6 text-white">JSM Electricals</span>
+    </a>
 
-  <!-- Page Content -->
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="text-primary">💳 Coupons</h4>
-      <a href="Coupon_Entry.html" class="btn btn-danger">+ Add Coupon</a>
-    </div>
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../Billing/Billing_List.html">🧾 Billing</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Winding/Stator_List.html">🌀 Stator</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Coupons/Coupon_List.html">🎟️ Coupons</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Coupon List -->
+  <main class="container my-4">
     <div class="card">
-      <div class="d-flex justify-content-between mb-2">
-        <input id="searchInput" class="form-control w-50" placeholder="🔍 Search coupons...">
-        <div>
-          <button id="exportBtn" class="btn btn-outline-secondary me-2">📤 Export CSV</button>
-          <button id="clearAll" class="btn btn-outline-danger">🧹 Clear All</button>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-2">
+        <h4 class="fw-bold text-danger m-0">🎟️ Coupon List</h4>
+        <div class="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
+          <input id="searchInput" class="form-control search-bar" placeholder="🔍 Search by code or discount">
+          <a href="Coupon_Entry.html" class="btn btn-danger w-100 w-sm-auto">➕ Add Coupon</a>
         </div>
       </div>
 
       <div class="table-responsive">
-        <table class="table table-hover align-middle" id="couponTable">
+        <table class="table table-bordered align-middle text-center" id="couponTable">
           <thead>
             <tr>
               <th>#</th>
               <th>Code</th>
               <th>Discount</th>
-              <th>Max Discount</th>
+              <th>Max ₹</th>
               <th>Valid Till</th>
               <th>Min Order</th>
               <th>Actions</th>
@@ -152,96 +147,74 @@
           <tbody></tbody>
         </table>
       </div>
-    </div>
-  </div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+      <div id="emptyState" class="empty-state d-none">
+        <p>🚫 No coupons found. Click “Add Coupon” to create one.</p>
+      </div>
+    </div>
+  </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const tbody = document.querySelector("#couponTable tbody");
-      const search = document.getElementById("searchInput");
-      const exportBtn = document.getElementById("exportBtn");
-      const clearBtn = document.getElementById("clearAll");
+      const tableBody = document.querySelector("#couponTable tbody");
+      const searchInput = document.getElementById("searchInput");
+      const emptyState = document.getElementById("emptyState");
       let coupons = JSON.parse(localStorage.getItem("coupons")) || [];
 
-      // === Render Function ===
-      function render(list) {
-        tbody.innerHTML = "";
-        if (!list.length) {
-          tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No coupons found.</td></tr>';
+      function renderTable(data = coupons) {
+        tableBody.innerHTML = "";
+
+        if (data.length === 0) {
+          emptyState.classList.remove("d-none");
           return;
         }
-        list.forEach((c, i) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
+
+        emptyState.classList.add("d-none");
+
+        data.forEach((c, i) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
             <td>${i + 1}</td>
-            <td><strong>${c.code}</strong></td>
+            <td><span class="fw-semibold">${c.code}</span></td>
             <td>${c.discount}%</td>
-            <td>₹${c.maxDiscount || 0}</td>
+            <td>${c.maxDiscount ? "₹" + c.maxDiscount : "-"}</td>
             <td>${c.validTill}</td>
-            <td>₹${c.minOrder || 0}</td>
+            <td>${c.minOrder ? "₹" + c.minOrder : "-"}</td>
             <td>
-              <button class="btn btn-sm btn-outline-primary edit" data-id="${c.id}">✏️</button>
-              <button class="btn btn-sm btn-outline-danger del" data-id="${c.id}">🗑</button>
+              <button class="btn btn-sm btn-outline-primary editBtn">✏️</button>
+              <button class="btn btn-sm btn-outline-danger deleteBtn">🗑️</button>
             </td>`;
-          tbody.appendChild(tr);
+          tableBody.appendChild(row);
+
+          row.querySelector(".editBtn").addEventListener("click", () => {
+            localStorage.setItem("editCoupon", JSON.stringify(c));
+            window.location.href = "Coupon_Entry.html";
+          });
+
+          row.querySelector(".deleteBtn").addEventListener("click", () => {
+            if (confirm(`Delete coupon "${c.code}"?`)) {
+              coupons = coupons.filter(x => x.id !== c.id);
+              localStorage.setItem("coupons", JSON.stringify(coupons));
+              renderTable();
+            }
+          });
         });
       }
 
-      render(coupons);
+      renderTable();
 
-      // === Edit / Delete Actions ===
-      tbody.addEventListener("click", e => {
-        if (e.target.classList.contains("del")) {
-          const id = +e.target.dataset.id;
-          if (confirm("Delete this coupon?")) {
-            coupons = coupons.filter(c => c.id !== id);
-            localStorage.setItem("coupons", JSON.stringify(coupons));
-            render(coupons);
-          }
-        }
-        if (e.target.classList.contains("edit")) {
-          const id = +e.target.dataset.id;
-          const coupon = coupons.find(c => c.id === id);
-          if (coupon) {
-            localStorage.setItem("editCoupon", JSON.stringify(coupon));
-            window.location.href = "Coupon_Entry.html";
-          }
-        }
-      });
-
-      // === Search Filter ===
-      search.addEventListener("input", () => {
-        const q = search.value.toLowerCase();
-        render(coupons.filter(c =>
-          c.code.toLowerCase().includes(q) ||
-          String(c.discount).includes(q) ||
-          c.validTill.includes(q)
-        ));
-      });
-
-      // === Export CSV ===
-      exportBtn.addEventListener("click", () => {
-        if (!coupons.length) return alert("No data to export");
-        const ws = XLSX.utils.json_to_sheet(coupons);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Coupons");
-        XLSX.writeFile(wb, "Coupons_List.xlsx");
-      });
-
-      // === Clear All ===
-      clearBtn.addEventListener("click", () => {
-        if (confirm("⚠️ Delete ALL coupons? This cannot be undone.")) {
-          localStorage.removeItem("coupons");
-          alert("✅ Coupon list cleared!");
-          location.reload();
-        }
+      searchInput.addEventListener("input", e => {
+        const term = e.target.value.trim().toLowerCase();
+        const filtered = coupons.filter(c =>
+          c.code.toLowerCase().includes(term) ||
+          String(c.discount).includes(term)
+        );
+        renderTable(filtered);
       });
     });
   </script>
-</body>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>

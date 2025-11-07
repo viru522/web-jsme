@@ -4,30 +4,29 @@
 <head>
   <meta charset="utf-8">
   <title>Stator List - JSME</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="../css/style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
   <style>
     :root {
       --primary: #b21f2d;
-      --success: #1e9c69;
-      --danger: #b21f2d;
-      --muted: #888;
+      --muted: #777;
       --bg: #fafafa;
     }
 
     body {
-      background: var(--bg);
       font-family: "Roboto", sans-serif;
+      background: var(--bg);
       color: #222;
+      margin: 0;
     }
 
     /* Navbar */
     .navbar {
       background: var(--primary);
       padding: 0.7rem 1rem;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     }
 
     .navbar-brand {
@@ -35,16 +34,16 @@
       align-items: center;
       gap: 10px;
       color: #fff !important;
+      text-decoration: none;
     }
 
     .navbar-brand .logo {
       background: #fff;
       color: var(--primary);
       font-weight: 800;
-      font-size: 18px;
-      border-radius: 10px;
       width: 45px;
       height: 45px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -52,11 +51,9 @@
 
     .navbar-nav .nav-link {
       color: #fff !important;
-      font-weight: 500;
-      margin-right: 8px;
       border-radius: 6px;
-      transition: background 0.2s;
       padding: 8px 12px !important;
+      transition: background 0.2s;
     }
 
     .navbar-nav .nav-link.active {
@@ -65,145 +62,54 @@
       font-weight: 600;
     }
 
-    /* Layout */
-    .container {
-      max-width: 1050px;
-      margin: 40px auto;
-      padding: 0 15px;
-    }
-
+    /* Card */
     .card {
       background: #fff;
-      border-radius: 16px;
-      padding: 22px 25px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
     h4 {
       color: var(--primary);
       font-weight: 700;
-      margin-bottom: 5px;
     }
 
     .text-muted {
       color: var(--muted) !important;
     }
 
-    /* Toolbar */
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
     .toolbar input {
-      flex: 1;
-      min-width: 260px;
-      border: 1px solid #ddd;
       border-radius: 8px;
+      border: 1px solid #ddd;
       padding: 8px 12px;
     }
 
     .btn-outline-secondary {
-      border-radius: 8px;
-      font-weight: 600;
-      border-color: #ccc;
+      border-color: #bbb;
     }
 
     .btn-outline-secondary:hover {
+      color: var(--primary);
       border-color: var(--primary);
-      color: var(--primary);
     }
 
-    /* Table Styles */
-    .table-container {
-      border: 1px solid #eee;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.04);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-    }
-
-    thead {
-      background: #fdf8f8;
-    }
-
-    thead th {
-      color: #555;
-      font-size: 13px;
+    .table thead th {
+      background: rgba(178, 31, 45, 0.08);
       text-transform: uppercase;
-      padding: 12px;
-      border-bottom: 1px solid #eee;
-      font-weight: 600;
-    }
-
-    tbody tr {
-      background: #fff;
-      border-bottom: 1px solid #eee;
-    }
-
-    tbody tr:hover {
-      background: #fff8f8;
-    }
-
-    tbody td {
-      padding: 10px 12px;
-      font-size: 14px;
-      vertical-align: middle;
-    }
-
-    tfoot td {
-      background: #fdf5f5;
-      font-weight: 600;
-      color: var(--primary);
-      padding: 10px;
-      text-align: center;
-    }
-
-    /* Buttons */
-    .btn-sm {
-      padding: 4px 8px;
       font-size: 13px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
+      font-weight: 700;
     }
 
-    .btn-outline-primary {
-      border-color: #007bff;
-      color: #007bff;
-    }
-
-    .btn-outline-primary:hover {
-      background: #007bff;
-      color: #fff;
-    }
-
-    .btn-outline-danger {
-      border-color: var(--danger);
-      color: var(--danger);
-    }
-
-    .btn-outline-danger:hover {
-      background: var(--danger);
-      color: #fff;
+    .table tbody tr:hover {
+      background: #fff6f6;
     }
 
     footer {
       text-align: center;
-      color: #999;
+      color: #aaa;
       margin-top: 25px;
-      font-size: 13px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -213,77 +119,69 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <div class="logo">JSME</div>
-        <div>
-          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
-        </div>
+      <a class="navbar-brand" href="/main/index.html">
+        <div><img class="logo" src="/main/Asset/img-123.png" alt="Logo"></div>
+        <span class="fw-bold fs-6 text-white">JSM Electricals</span>
       </a>
 
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse justify-content-end" id="navMenu">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
           <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
           <li class="nav-item"><a class="nav-link active" href="../Winding/Stator_List.html">🌀 Stator</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Main -->
-  <div class="container">
+  <main class="container my-4">
     <div class="card">
-      <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+      <!-- Header -->
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-3">
         <div>
-          <h4>🌀 Stator List</h4>
-          <p class="text-muted m-0">All stator types saved in local database</p>
+          <h4 class="mb-1">🌀 Stator List</h4>
+          <p class="text-muted mb-0">All stator types saved in local database</p>
         </div>
-        <div>
-          <a href="Stator_Entry.html" class="btn btn-danger">+ Add Stator</a>
-        </div>
+        <a href="Stator_Entry.html" class="btn btn-danger fw-semibold px-3">+ Add Stator</a>
       </div>
 
-      <div class="toolbar">
-        <input type="text" id="searchInput" placeholder="🔍 Search stator type or company...">
-        <button id="exportBtn" class="btn btn-outline-secondary">📤 Export CSV</button>
+      <!-- Toolbar -->
+      <div class="d-flex flex-column flex-md-row align-items-stretch align-items-md-center gap-2 mb-3">
+        <input id="searchInput" class="form-control" placeholder="🔍 Search stator type or company...">
+        <button id="exportBtn" class="btn btn-outline-secondary fw-semibold px-3">📤 Export CSV</button>
       </div>
 
-      <div class="table-container">
-        <table class="table mb-0" id="statorTable">
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table align-middle mb-0" id="statorTable">
           <thead>
             <tr>
               <th>#</th>
               <th>Type</th>
               <th>Company</th>
               <th>Qty</th>
-              <th style="text-align:center;">Actions</th>
+              <th class="text-center">Actions</th>
             </tr>
           </thead>
           <tbody></tbody>
           <tfoot>
-            <tr>
-              <td colspan="5" id="summaryRow"></td>
-            </tr>
+            <tr><td colspan="5" id="summaryRow" class="text-center text-primary fw-semibold"></td></tr>
           </tfoot>
         </table>
       </div>
 
-      <footer>© 2008 Jai Santoshi Mata Electrical</footer>
+      <footer class="mt-3">© 2008 Jai Santoshi Mata Electrical</footer>
     </div>
-  </div>
+  </main>
 
+  <!-- JS Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const tableBody = document.querySelector("#statorTable tbody");
@@ -296,8 +194,8 @@
 
       function renderTable(data) {
         tableBody.innerHTML = "";
-        if (data.length === 0) {
-          tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">No stators found.</td></tr>`;
+        if (!data.length) {
+          tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">No stators found.</td></tr>`;
           summaryRow.textContent = "";
           return;
         }
@@ -312,8 +210,7 @@
             <td class="text-center">
               <button class="btn btn-sm btn-outline-primary edit-btn" data-id="${item.id}">✏️ Edit</button>
               <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${item.id}">🗑 Delete</button>
-            </td>
-          `;
+            </td>`;
           tableBody.appendChild(tr);
         });
 
@@ -323,8 +220,8 @@
 
       function attachEvents() {
         document.querySelectorAll(".delete-btn").forEach(btn => {
-          btn.addEventListener("click", function () {
-            const id = this.getAttribute("data-id");
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-id");
             if (!confirm("Delete this stator?")) return;
             statorList = statorList.filter(i => i.id != id);
             localStorage.setItem("statorList", JSON.stringify(statorList));
@@ -333,8 +230,8 @@
         });
 
         document.querySelectorAll(".edit-btn").forEach(btn => {
-          btn.addEventListener("click", function () {
-            const id = this.getAttribute("data-id");
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-id");
             const record = statorList.find(i => i.id == id);
             if (record) {
               localStorage.setItem("editStator", JSON.stringify(record));
@@ -348,23 +245,19 @@
         const totalQty = data.reduce((sum, i) => sum + Number(i.qty || 0), 0);
         const uniqueTypes = new Set(data.map(i => i.type)).size;
         const uniqueCompanies = new Set(data.map(i => i.company)).size;
-
-        summaryRow.textContent =
-          `TOTAL ITEMS: ${data.length} | UNIQUE TYPES: ${uniqueTypes} | UNIQUE COMPANIES: ${uniqueCompanies} | TOTAL QTY: ${totalQty}`;
+        summaryRow.textContent = `TOTAL ITEMS: ${data.length} | UNIQUE TYPES: ${uniqueTypes} | COMPANIES: ${uniqueCompanies} | TOTAL QTY: ${totalQty}`;
       }
 
       searchInput.addEventListener("input", e => {
         const q = e.target.value.toLowerCase();
         const filtered = statorList.filter(
-          s =>
-            s.type.toLowerCase().includes(q) ||
-            s.company.toLowerCase().includes(q)
+          s => s.type.toLowerCase().includes(q) || s.company.toLowerCase().includes(q)
         );
         renderTable(filtered);
       });
 
       exportBtn.addEventListener("click", () => {
-        if (statorList.length === 0) return alert("No data to export.");
+        if (!statorList.length) return alert("No data to export.");
         const ws = XLSX.utils.json_to_sheet(statorList);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Stator List");
@@ -375,5 +268,4 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

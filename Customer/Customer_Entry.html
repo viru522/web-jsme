@@ -1,61 +1,119 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Add Customer - JSME</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="../css/style.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    :root { --primary: #b21f2d; }
-    body { background: #fafafa; margin: 0; font-family: "Roboto", sans-serif; }
 
-    .navbar { background: var(--primary); padding: 0.7rem 1.2rem; }
-    .navbar-brand { display: flex; align-items: center; gap: 10px; color: #fff !important; }
+  <style>
+    :root {
+      --primary: #b21f2d;
+    }
+
+    body {
+      background: #fafafa;
+      font-family: "Roboto", sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--primary);
+      padding: 0.7rem 1rem;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff !important;
+    }
+
     .navbar-brand .logo {
-      background: #fff; color: var(--primary); font-weight: 800; font-size: 18px;
-      border-radius: 10px; width: 45px; height: 45px; display: flex;
-      align-items: center; justify-content: center;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 18px;
+      border-radius: 10px;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 3px 8px rgba(255, 255, 255, 0.25);
     }
-    .navbar-nav .nav-link { color: #fff !important; font-weight: 500; margin-right: 8px; border-radius: 6px; transition: background 0.2s; padding: 8px 12px !important; }
-    .navbar-nav .nav-link:hover { background: rgba(255, 255, 255, 0.2); }
-    .navbar-nav .nav-link.active { background: #fff; color: var(--primary) !important; font-weight: 600; }
 
-    .card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); margin: 30px auto; max-width: 900px; }
-    .form-section { background: #fff9f9; border: 1px solid #f9e0e0; border-radius: 10px; padding: 16px; margin-bottom: 18px; }
-    .form-section h6 { color: var(--primary); font-weight: 700; font-size: 15px; text-transform: uppercase; margin-bottom: 10px; }
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px 16px; }
-    textarea.form-control { resize: vertical; min-height: 60px; }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      border-radius: 6px;
+      padding: 8px 12px !important;
+      transition: background 0.2s ease;
+    }
 
-    .btn-danger { background: var(--primary); border: none; padding: 10px 20px; font-weight: 600; border-radius: 10px; }
-    .btn-danger:hover { opacity: 0.9; }
+    .navbar-nav .nav-link.active {
+      background: #fff;
+      color: var(--primary) !important;
+      font-weight: 600;
+    }
+
+    /* Card and Form */
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      padding: 24px;
+    }
+
+    .form-section {
+      background: #fff9f9;
+      border: 1px solid #f9e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-section h6 {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .btn-danger {
+      background: var(--primary);
+      border: none;
+      font-weight: 600;
+    }
+
+    .btn-danger:hover {
+      opacity: 0.9;
+    }
 
     .btn-secondary {
       background: #444;
       color: #fff;
       border: none;
-      padding: 10px 20px;
       font-weight: 600;
-      border-radius: 10px;
     }
-    .btn-secondary:hover { opacity: 0.85; }
+
+    .btn-secondary:hover {
+      opacity: 0.85;
+    }
 
     .save-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       background: #fff;
-      padding: 12px 16px;
-      box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.05);
-      border-radius: 10px;
-      position: sticky;
-      bottom: 0;
-      gap: 10px;
-    }
-    @media (max-width: 768px) {
-      .save-bar { flex-direction: column; }
-      .btn { width: 100%; }
+      border-top: 1px solid #eee;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      padding: 1rem;
     }
   </style>
 </head>
@@ -65,14 +123,14 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <div class="logo">JSME</div>
-        <div style="line-height:1;">
-          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
+      <a class="navbar-brand" href="/main/index.html">
+        <div>
+          <img class="logo" src="/main/Asset/img-123.png" id="navbarLogo" width="50vh" height="50%" alt="Logo">
         </div>
+        <span id="navbarName" class="fw-bold fs-6 text-white">JSM Electricals</span>
       </a>
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -87,6 +145,8 @@
           <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Coupons/Coupon_List.html">🎟️ Coupons</a></li>
           <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
         </ul>
       </div>
@@ -94,33 +154,33 @@
   </nav>
 
   <!-- Main Content -->
-  <main>
+  <main class="container my-4">
     <div class="card">
-      <div class="card-header">
-        <h5 class="m-0 text-primary">🧍‍♂️ Add New Customer</h5>
-        <p class="text-muted small-muted">Please fill out all required fields (*)</p>
+      <div class="mb-3">
+        <h5 class="fw-bold text-danger mb-1">🧍‍♂️ Add New Customer</h5>
+        <p class="text-muted small">Please fill out all required fields (*)</p>
       </div>
 
-      <form id="customerForm">
+      <form id="customerForm" novalidate>
         <!-- Basic Info -->
         <div class="form-section">
           <h6>Basic Information</h6>
-          <div class="form-grid">
-            <div>
-              <label class="form-label required">Customer Name</label>
+          <div class="row g-3">
+            <div class="col-12 col-md-6 col-lg-4">
+              <label class="form-label">Customer Name *</label>
               <input id="customerName" name="name" class="form-control" placeholder="Full Name" required>
             </div>
-            <div>
-              <label>Company</label>
+            <div class="col-12 col-md-6 col-lg-4">
+              <label class="form-label">Company</label>
               <input id="company" name="company" class="form-control" placeholder="Company or Organization">
             </div>
-            <div>
-              <label class="form-label required">Mobile</label>
+            <div class="col-12 col-md-6 col-lg-4">
+              <label class="form-label">Mobile *</label>
               <input id="mobile" name="mobile" class="form-control" placeholder="10-digit number" pattern="[0-9]{10}" required>
             </div>
-            <div>
-              <label>Email</label>
-              <input id="email" name="email" class="form-control" type="email" placeholder="example@mail.com">
+            <div class="col-12 col-md-6 col-lg-4">
+              <label class="form-label">Email</label>
+              <input id="email" name="email" type="email" class="form-control" placeholder="example@mail.com">
             </div>
           </div>
         </div>
@@ -128,80 +188,90 @@
         <!-- Address Info -->
         <div class="form-section">
           <h6>Address Information</h6>
-          <div class="form-grid">
-            <div><label>City</label><input id="city" name="city" class="form-control" placeholder="City"></div>
-            <div><label>State</label><input id="state" name="state" class="form-control" placeholder="State"></div>
-            <div style="grid-column: 1 / -1;">
-              <label>Full Address</label>
+          <div class="row g-3">
+            <div class="col-12 col-md-6 col-lg-4">
+              <label class="form-label">City</label>
+              <input id="city" name="city" class="form-control" placeholder="City">
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <label class="form-label">State</label>
+              <input id="state" name="state" class="form-control" placeholder="State">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Full Address</label>
               <textarea id="address" name="address" class="form-control" placeholder="Street, landmark, area..."></textarea>
             </div>
           </div>
         </div>
 
-        <!-- Save bar -->
-        <div class="save-bar">
+        <!-- Save Bar -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center save-bar gap-3">
           <small class="text-muted">⚡ Data is stored locally in your browser</small>
-          <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-danger">💾 Save Customer</button>
-            <a href="Customer_List.html" class="btn btn-secondary">👁 View Customers</a>
+          <div class="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
+            <button type="submit" class="btn btn-danger w-100 w-sm-auto">💾 Save Customer</button>
+            <a href="Customer_List.html" class="btn btn-secondary w-100 w-sm-auto">👁 View Customers</a>
           </div>
         </div>
       </form>
     </div>
 
-    <footer class="app-footer text-center text-muted my-3">© 2008 Jai Santoshi Mata Electrical</footer>
+    <footer class="text-center text-muted mt-3 small">© 2008 Jai Santoshi Mata Electrical</footer>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
+  <!-- JS -->
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("customerForm");
-    const editData = JSON.parse(localStorage.getItem("editCustomer"));
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("customerForm");
+      const editData = JSON.parse(localStorage.getItem("editCustomer"));
 
-    if (editData) {
-      document.getElementById("customerName").value = editData.name;
-      document.getElementById("company").value = editData.company;
-      document.getElementById("mobile").value = editData.mobile;
-      document.getElementById("email").value = editData.email;
-      document.getElementById("city").value = editData.city;
-      document.getElementById("state").value = editData.state;
-      document.getElementById("address").value = editData.address;
-      form.querySelector("button[type='submit']").textContent = "✏️ Update Customer";
-    }
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const data = {
-        id: editData ? editData.id : Date.now(),
-        name: document.getElementById("customerName").value.trim(),
-        company: document.getElementById("company").value.trim(),
-        mobile: document.getElementById("mobile").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        city: document.getElementById("city").value.trim(),
-        state: document.getElementById("state").value.trim(),
-        address: document.getElementById("address").value.trim(),
-        status: "Active"
-      };
-
-      if (!data.name || !data.mobile) return alert("⚠️ Name and Mobile number are required!");
-
-      let customers = JSON.parse(localStorage.getItem("customers")) || [];
       if (editData) {
-        const index = customers.findIndex(c => c.id === editData.id);
-        if (index !== -1) customers[index] = data;
-        localStorage.removeItem("editCustomer");
-        alert("✅ Customer updated successfully!");
-      } else {
-        customers.push(data);
-        alert("✅ Customer added successfully!");
+        form.customerName.value = editData.name;
+        form.company.value = editData.company;
+        form.mobile.value = editData.mobile;
+        form.email.value = editData.email;
+        form.city.value = editData.city;
+        form.state.value = editData.state;
+        form.address.value = editData.address;
+        form.querySelector("button[type='submit']").textContent = "✏️ Update Customer";
       }
 
-      localStorage.setItem("customers", JSON.stringify(customers));
-      window.location.href = "Customer_List.html";
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        const data = {
+          id: editData ? editData.id : Date.now(),
+          name: form.customerName.value.trim(),
+          company: form.company.value.trim(),
+          mobile: form.mobile.value.trim(),
+          email: form.email.value.trim(),
+          city: form.city.value.trim(),
+          state: form.state.value.trim(),
+          address: form.address.value.trim(),
+          status: "Active"
+        };
+
+        if (!data.name || !data.mobile) {
+          alert("⚠️ Name and Mobile number are required!");
+          return;
+        }
+
+        let customers = JSON.parse(localStorage.getItem("customers")) || [];
+        if (editData) {
+          const index = customers.findIndex(c => c.id === editData.id);
+          if (index !== -1) customers[index] = data;
+          localStorage.removeItem("editCustomer");
+          alert("✅ Customer updated successfully!");
+        } else {
+          customers.push(data);
+          alert("✅ Customer added successfully!");
+        }
+
+        localStorage.setItem("customers", JSON.stringify(customers));
+        window.location.href = "Customer_List.html";
+      });
     });
-  });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

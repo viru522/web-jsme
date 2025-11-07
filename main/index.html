@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <title>JSME - Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
@@ -56,10 +55,9 @@
     .navbar-nav .nav-link {
       color: #fff !important;
       font-weight: 500;
-      margin-right: 8px;
       border-radius: 6px;
       padding: 8px 12px !important;
-      transition: background 0.2s ease-in-out;
+      transition: 0.2s;
     }
 
     .navbar-nav .nav-link:hover,
@@ -68,24 +66,19 @@
     }
 
     /* Hero Section */
-    .hero {
-      text-align: center;
-      margin: 60px 0 40px;
-      padding: 0 15px;
-    }
-
     .hero-logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       background: var(--card-bg);
       color: var(--primary);
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       font-weight: 800;
       font-size: 26px;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
       transition: transform 0.3s ease;
     }
 
@@ -93,44 +86,27 @@
       transform: rotate(8deg) scale(1.05);
     }
 
-    .hero h1 {
-      margin-top: 16px;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.3px;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-
-    .current-date {
+    .count-badge {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: var(--primary);
+      color: #fff;
       font-size: 13px;
-      color: #888;
-      margin-top: 6px;
-    }
-
-    /* Summary Grid */
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin: 0 auto 40px;
-      max-width: 1100px;
-      padding: 0 20px;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 2px 8px;
     }
 
     .summary-card {
       background: var(--card-bg);
       border-radius: 14px;
       box-shadow: var(--shadow);
-      padding: 24px 18px;
+      padding: 22px 18px;
       text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
       text-decoration: none;
       color: inherit;
+      transition: all 0.2s ease;
       position: relative;
     }
 
@@ -145,34 +121,22 @@
     }
 
     .summary-card h5 {
-      font-weight: 700;
       color: var(--primary);
-      margin: 0;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     .summary-card p {
       color: var(--muted);
       font-size: 14px;
-      margin-top: 4px;
+      margin: 0;
     }
 
-    .count-badge {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      background: var(--primary);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      border-radius: 50px;
-      padding: 2px 8px;
-    }
-
-    /* Floating Add Buttons */
+    /* Floating Buttons */
     .fab-container {
       position: fixed;
-      bottom: 30px;
-      right: 25px;
+      bottom: 25px;
+      right: 20px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -201,23 +165,8 @@
     footer {
       text-align: center;
       color: #999;
-      margin: 50px 0 20px;
       font-size: 14px;
-    }
-
-    /* Responsive Fix */
-    @media (max-width: 576px) {
-      .navbar-brand .logo {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
-      }
-
-      .hero-logo {
-        width: 80px;
-        height: 80px;
-        font-size: 22px;
-      }
+      margin: 40px 0 20px;
     }
   </style>
 </head>
@@ -227,28 +176,22 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <div class="logo">JSME</div>
-        <div>
-          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
-        </div>
+      <a class="navbar-brand" href="/main/index.html">
+        <div><img class="logo" src="/main/Asset/img-123.png" alt="Logo"></div>
+        <span class="fw-bold fs-6 text-white">JSM Electricals</span>
       </a>
 
-      <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse justify-content-end" id="navMenu">
-        <ul class="navbar-nav align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="../Dashboard/index.html">🏠 Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
           <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
           <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
-          <li class="nav-item"><a class="nav-link active" href="../Winding/Stator_List.html">🌀 Stator</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
           <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
         </ul>
@@ -257,71 +200,75 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-logo">JSME</div>
-    <h1>Jai Santoshi Mata Electrical</h1>
-    <p>Admin Panel — Manage Billing, Inventory, Winding, and Services</p>
-    <div class="current-date" id="currentDate"></div>
+  <section class="container text-center my-5">
+    <div class="hero-logo mb-3">JSME</div>
+    <h1 class="fw-bold text-danger">Jai Santoshi Mata Electrical</h1>
+    <p class="text-muted mb-1">Admin Panel — Manage Billing, Inventory, Winding, and Services</p>
+    <div id="currentDate" class="text-secondary small"></div>
   </section>
 
-  <!-- Summary Section -->
-  <section class="summary-grid" id="summaryGrid">
-    <a href="Dashboard/index.html" class="summary-card">
-      <div class="icon">🏠</div>
-      <h5>Dashboard</h5>
-      <p>Overview and quick metrics</p>
-    </a>
+  <!-- Summary Grid -->
+  <section class="container mb-5">
+    <div class="row g-3 justify-content-center">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="../Dashboard/index.html" class="summary-card d-block">
+          <div class="icon">🏠</div>
+          <h5>Dashboard</h5>
+          <p>Overview and quick metrics</p>
+        </a>
+      </div>
 
-    <a href="Customer/Customer_List.html" class="summary-card">
-      <div class="icon">👥</div>
-      <h5>Customers</h5>
-      <p>View or add customer data</p>
-    </a>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="../Customer/Customer_List.html" class="summary-card d-block">
+          <div class="icon">👥</div>
+          <h5>Customers</h5>
+          <p>View or add customer data</p>
+        </a>
+      </div>
 
-    <a href="Billing/Billing_List.html" class="summary-card">
-      <div class="icon">🧾</div>
-      <h5>Billing</h5>
-      <p>Manage and create invoices</p>
-    </a>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="../Billing/Billing_List.html" class="summary-card d-block">
+          <div class="icon">🧾</div>
+          <h5>Billing</h5>
+          <p>Manage and create invoices</p>
+        </a>
+      </div>
 
-    <a href="Winding/Data_List.html" class="summary-card">
-      <div class="icon">⚙️</div>
-      <h5>Winding</h5>
-      <p>Track stator winding details</p>
-    </a>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="../Winding/Data_List.html" class="summary-card d-block">
+          <div class="icon">⚙️</div>
+          <h5>Winding</h5>
+          <p>Track stator winding details</p>
+        </a>
+      </div>
 
-    <a href="Winding/Stator_List.html" class="summary-card">
-      <div class="icon">🌀</div>
-      <h5>Stator</h5>
-      <p>Maintain stator type records</p>
-    </a>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="../Inventory/Stock_List.html" class="summary-card d-block">
+          <div class="icon">📦</div>
+          <h5>Stock</h5>
+          <p>Inventory and stock control</p>
+        </a>
+      </div>
 
-    <a href="Inventory/Stock_List.html" class="summary-card">
-      <div class="icon">📦</div>
-      <h5>Stock</h5>
-      <p>Inventory and stock control</p>
-    </a>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="../Inventory/Sale_List.html" class="summary-card d-block">
+          <div class="icon">💼</div>
+          <h5>Sales</h5>
+          <p>Track product sales data</p>
+        </a>
+      </div>
 
-    <a href="Inventory/Purchase_List.html" class="summary-card">
-      <div class="icon">🛒</div>
-      <h5>Purchase</h5>
-      <p>Record incoming goods</p>
-    </a>
-
-    <a href="Inventory/Sale_List.html" class="summary-card">
-      <div class="icon">💼</div>
-      <h5>Sales</h5>
-      <p>Track product sales data</p>
-    </a>
-
-    <a href="Auth/System.html" class="summary-card">
-      <div class="icon">⚙️</div>
-      <h5>Settings</h5>
-      <p>System preferences & updates</p>
-    </a>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="../Auth/System.html" class="summary-card d-block">
+          <div class="icon">⚙️</div>
+          <h5>Settings</h5>
+          <p>System preferences & updates</p>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <!-- Floating Quick Action Buttons -->
+  <!-- Floating Action Buttons -->
   <div class="fab-container">
     <a href="../Customer/Customer_Entry.html" title="Add Customer">👤</a>
     <a href="../Billing/Billing_Entry.html" title="Create Bill">🧾</a>
@@ -343,15 +290,15 @@
           day: "numeric"
         });
 
-      // Simulate live data counts
+      // Simulated data counts
       const counts = {
+        Dashboard: 1,
         Customers: 123,
         Billing: 87,
         Winding: 32,
-        Stator: 15,
         Stock: 142,
-        Purchase: 64,
-        Sales: 98
+        Sales: 98,
+        Settings: 3
       };
 
       document.querySelectorAll(".summary-card").forEach(card => {
@@ -366,5 +313,4 @@
     });
   </script>
 </body>
-
 </html>

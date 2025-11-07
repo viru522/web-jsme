@@ -4,31 +4,22 @@
 <head>
   <meta charset="utf-8">
   <title>JSME Portal</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     :root {
       --primary: #b21f2d;
     }
 
     body {
-      margin: 0;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 0;
       background: linear-gradient(135deg, #fff, #ffeaea);
       font-family: "Roboto", sans-serif;
     }
 
-    .splash {
-      text-align: center;
-      animation: fadeIn 0.5s ease;
-    }
-
     .logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       width: 100px;
       height: 100px;
       border-radius: 20px;
@@ -36,23 +27,18 @@
       color: #fff;
       font-weight: 800;
       font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 8px 25px rgba(178, 31, 45, 0.3);
-      margin-bottom: 18px;
-    }
-
-    .text {
-      color: var(--primary);
-      font-weight: 600;
-      letter-spacing: 0.5px;
     }
 
     .spinner {
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       border: 3px solid #fff;
       border-top-color: var(--primary);
       border-radius: 50%;
-      margin: 20px auto;
       animation: spin 1s linear infinite;
     }
 
@@ -65,20 +51,26 @@
     @keyframes fadeIn {
       from {
         opacity: 0;
+        transform: translateY(10px);
       }
 
       to {
         opacity: 1;
+        transform: translateY(0);
       }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease;
     }
   </style>
 </head>
 
-<body>
-  <div class="splash">
-    <div class="logo">JSME</div>
-    <div class="text">Jai Santoshi Mata Electrical</div>
-    <div class="spinner"></div>
+<body class="d-flex justify-content-center align-items-center text-center">
+  <div class="fade-in">
+    <div class="logo mx-auto mb-3">JSME</div>
+    <h5 class="fw-semibold text-danger mb-3">Jai Santoshi Mata Electrical</h5>
+    <div class="spinner mx-auto"></div>
   </div>
 
   <script>
@@ -87,6 +79,8 @@
       window.location.href = '../Auth/Login.html';
     }, 1500);
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -4,8 +4,9 @@
 <head>
   <meta charset="utf-8">
   <title>Register - JSME</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="../css/style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     :root {
       --primary: #b21f2d;
@@ -14,85 +15,40 @@
     body {
       background: linear-gradient(135deg, #fff, #ffeaea);
       font-family: "Roboto", sans-serif;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
       margin: 0;
     }
 
-    .register-card {
+    .card-register {
       background: #fff;
       border-radius: 14px;
-      padding: 32px 30px;
       box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 460px;
       animation: fadeIn 0.4s ease;
-    }
-
-    h4 {
-      text-align: center;
-      color: var(--primary);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    p.subtitle {
-      text-align: center;
-      color: #777;
-      font-size: 14px;
-      margin-bottom: 28px;
-    }
-
-    .form-control {
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 14px;
-      margin-bottom: 18px;
-      transition: all 0.2s ease;
     }
 
     .form-control:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(178, 31, 45, 0.1);
-      outline: none;
-    }
-
-    .btn {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      padding: 10px;
-      transition: 0.2s;
     }
 
     .btn-danger {
       background: var(--primary);
-      color: #fff;
+      border: none;
     }
 
     .btn-danger:hover {
       opacity: 0.9;
     }
 
-    .text-center {
-      text-align: center;
-    }
-
-    .text-link {
-      font-size: 14px;
+    a.text-link {
       color: var(--primary);
       text-decoration: none;
-      transition: 0.2s;
     }
 
-    .text-link:hover {
+    a.text-link:hover {
       text-decoration: underline;
     }
 
@@ -107,34 +63,40 @@
         transform: translateY(0);
       }
     }
-
-    @media (max-width: 480px) {
-      .register-card {
-        padding: 24px 20px;
-      }
-    }
   </style>
 </head>
 
 <body>
-  <div class="register-card">
-    <h4>Create Account</h4>
-    <p class="subtitle">Join JSM Electrical Admin Portal</p>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-11 col-sm-10 col-md-8 col-lg-5">
+        <div class="card card-register p-4 p-md-5">
+          <h4 class="text-center fw-bold text-danger mb-1">Create Account</h4>
+          <p class="text-center text-muted mb-4">Join JSM Electrical Admin Portal</p>
 
-    <form id="registerForm" novalidate>
-      <input class="form-control" id="fullname" placeholder="Full Name" required>
-      <input class="form-control" id="email" type="email" placeholder="Email Address" required>
-      <input class="form-control" id="pwd" type="password" placeholder="Password (min 6 chars)" minlength="6" required>
-      <button class="btn btn-danger">Register</button>
-    </form>
+          <form id="registerForm" novalidate>
+            <div class="mb-3">
+              <input type="text" class="form-control" id="fullname" placeholder="Full Name" required>
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" id="pwd" placeholder="Password (min 6 chars)" minlength="6" required>
+            </div>
+            <button type="submit" class="btn btn-danger w-100 fw-semibold">Register</button>
+          </form>
 
-    <div class="text-center" style="margin-top:16px;">
-      <a href="Login.html" class="text-link">Already have an account? Sign in</a>
+          <div class="text-center mt-3">
+            <a href="Login.html" class="text-link">Already have an account? Sign in</a>
+          </div>
+
+          <p class="text-center text-muted small mt-4 mb-0">
+            © 2008 Jai Santoshi Mata Electrical
+          </p>
+        </div>
+      </div>
     </div>
-
-    <p style="text-align:center;color:#777;font-size:12px;margin-top:30px;">
-      © 2008 Jai Santoshi Mata Electrical
-    </p>
   </div>
 
   <script>
@@ -159,6 +121,8 @@
       window.location.href = 'Login.html';
     });
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

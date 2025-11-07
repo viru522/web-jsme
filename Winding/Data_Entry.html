@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <title>Winding Entry - JSME</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="../css/style.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
@@ -16,14 +15,15 @@
 
     body {
       background: #fafafa;
-      margin: 0;
       font-family: "Roboto", sans-serif;
+      margin: 0;
     }
 
     /* Navbar */
     .navbar {
       background: var(--primary);
-      padding: 0.7rem 1.2rem;
+      padding: 0.8rem 1.2rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     }
 
     .navbar-brand {
@@ -50,14 +50,9 @@
     .navbar-nav .nav-link {
       color: #fff !important;
       font-weight: 500;
-      margin-right: 8px;
       border-radius: 6px;
-      transition: background 0.2s;
       padding: 8px 12px !important;
-    }
-
-    .navbar-nav .nav-link:hover {
-      background: rgba(255, 255, 255, 0.2);
+      transition: background 0.2s;
     }
 
     .navbar-nav .nav-link.active {
@@ -66,29 +61,22 @@
       font-weight: 600;
     }
 
-    /* Layout and Form */
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 15px;
-    }
-
+    /* Card and Form */
     .card {
       background: #fff;
       border-radius: 12px;
-      padding: 20px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 24px;
     }
 
-    h4, h5 {
+    h4 {
       color: var(--primary);
       font-weight: 700;
-      margin-bottom: 12px;
     }
 
     label {
       font-weight: 600;
-      color: #444;
+      color: #333;
     }
 
     .form-control {
@@ -108,6 +96,7 @@
     .btn-outline-primary {
       color: var(--primary);
       border-color: var(--primary);
+      border-radius: 8px;
     }
 
     .btn-outline-primary:hover {
@@ -116,37 +105,30 @@
     }
 
     .pitch-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) 40px;
-      gap: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
       margin-bottom: 8px;
     }
 
     .pitch-row input {
-      border-radius: 8px;
-      padding: 6px 8px;
+      flex: 1;
+      min-width: 120px;
     }
 
     #preview {
       display: block;
-      margin-top: 8px;
+      margin-top: 10px;
       border-radius: 8px;
-      max-height: 120px;
+      max-height: 140px;
     }
 
     footer {
       text-align: center;
-      color: #999;
-      margin-top: 30px;
-    }
-
-    @media (max-width: 768px) {
-      .btn {
-        width: 100%;
-      }
-      .pitch-row {
-        grid-template-columns: 1fr 1fr;
-      }
+      color: #888;
+      margin-top: 40px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -154,97 +136,96 @@
 <body>
 
   <!-- Navbar -->
-   <nav class="navbar navbar-expand-lg sticky-top">
+  <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <div class="logo">JSME</div>
-        <div style="line-height:1;">
-          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
+      <a class="navbar-brand" href="/main/index.html">
+        <div>
+          <img class="logo" src="/main/Asset/img-123.png" alt="Logo">
         </div>
+        <span class="fw-bold fs-6 text-white">JSM Electricals</span>
       </a>
 
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse justify-content-end" id="navMenu">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
           <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
-
-          <!-- Stator Section -->
-          <li class="nav-item"><a class="nav-link active" href="../Winding/Stator_List.html">🌀 Stator</a></li>
-
+          <li class="nav-item"><a class="nav-link active" href="../Winding/Data_List.html">⚙️ Winding</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Coupons/Coupon_List.html">🎟️ Coupons</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <div class="container">
+  <!-- Main Form -->
+  <main class="container my-4">
     <div class="card">
-      <h4>🧭 Stator Winding Entry</h4>
-      <p class="text-muted mb-4">Add new winding data with full motor details, starting and running pitches.</p>
+      <h4 class="mb-3">🧭 Stator Winding Entry</h4>
+      <p class="text-muted mb-4">Add winding details with motor specifications, starting and running pitches.</p>
 
-      <form id="entryForm">
+      <form id="entryForm" class="d-flex flex-column gap-3">
+
         <!-- Basic Info -->
-        <div class="row g-3 mb-3">
-          <div class="col-md-4">
+        <div class="row g-3">
+          <div class="col-12 col-md-4">
             <label class="form-label">Date</label>
             <input type="date" id="date" name="date" class="form-control" required>
           </div>
-          <div class="col-md-8">
+          <div class="col-12 col-md-8">
             <label class="form-label">Motor Name</label>
             <input type="text" id="name" name="name" class="form-control" placeholder="Motor / Stator name" required>
           </div>
         </div>
 
-        <div class="row g-3 mb-3">
-          <div class="col-md-3"><input id="type" name="type" class="form-control" placeholder="Type"></div>
-          <div class="col-md-2"><input id="phase" name="phase" class="form-control" placeholder="Phase"></div>
-          <div class="col-md-2"><input id="hp" name="hp" class="form-control" placeholder="HP"></div>
-          <div class="col-md-2"><input id="kw" name="kw" class="form-control" placeholder="KW"></div>
-          <div class="col-md-3"><input id="rpm" name="rpm" class="form-control" placeholder="RPM"></div>
+        <div class="row g-3">
+          <div class="col-6 col-md-3"><input id="type" name="type" class="form-control" placeholder="Type"></div>
+          <div class="col-6 col-md-2"><input id="phase" name="phase" class="form-control" placeholder="Phase"></div>
+          <div class="col-6 col-md-2"><input id="hp" name="hp" class="form-control" placeholder="HP"></div>
+          <div class="col-6 col-md-2"><input id="kw" name="kw" class="form-control" placeholder="KW"></div>
+          <div class="col-6 col-md-3"><input id="rpm" name="rpm" class="form-control" placeholder="RPM"></div>
         </div>
 
         <!-- Image Upload -->
-        <div class="mb-3">
+        <div>
           <label class="form-label">Motor / Nameplate Image</label>
           <input type="file" id="image" class="form-control" accept="image/*">
           <img id="preview" src="">
         </div>
 
         <!-- Starting Pitch -->
-        <h6 class="text-primary mt-4">Starting Pitch</h6>
-        <div id="startingPitches"></div>
-        <button type="button" id="addStart" class="btn btn-outline-primary btn-sm mt-2">+ Add Start Pitch</button>
+        <div>
+          <h6 class="text-danger fw-bold mt-3">Starting Pitch</h6>
+          <div id="startingPitches" class="d-flex flex-column gap-2"></div>
+          <button type="button" id="addStart" class="btn btn-outline-primary btn-sm mt-2">+ Add Start Pitch</button>
+        </div>
 
         <!-- Running Pitch -->
-        <h6 class="text-primary mt-4">Running Pitch</h6>
-        <div id="runningPitches"></div>
-        <button type="button" id="addRun" class="btn btn-outline-primary btn-sm mt-2">+ Add Run Pitch</button>
+        <div>
+          <h6 class="text-danger fw-bold mt-3">Running Pitch</h6>
+          <div id="runningPitches" class="d-flex flex-column gap-2"></div>
+          <button type="button" id="addRun" class="btn btn-outline-primary btn-sm mt-2">+ Add Run Pitch</button>
+        </div>
 
-        <div class="d-grid gap-2 mt-4">
-          <button class="btn btn-danger" type="submit">💾 Save Entry</button>
-          <button type="button" id="exportBtn" class="btn btn-outline-secondary">📤 Export to Excel</button>
+        <!-- Buttons -->
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-stretch align-items-sm-center gap-3 mt-3">
+          <button class="btn btn-danger flex-fill" type="submit">💾 Save Entry</button>
+          <button type="button" id="exportBtn" class="btn btn-outline-secondary flex-fill">📤 Export Excel</button>
         </div>
       </form>
     </div>
+    <footer>© 2008 Jai Santoshi Mata Electrical</footer>
+  </main>
 
-    <footer class="app-footer text-center text-muted my-3">© 2008 Jai Santoshi Mata Electrical</footer>
-  </div>
-
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../js/config.js"></script>
   <script src="../js/common.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
     const startDiv = document.getElementById("startingPitches"),
       runDiv = document.getElementById("runningPitches");
@@ -267,17 +248,21 @@
     addPitch(startDiv);
     addPitch(runDiv);
 
-    const imageInput = document.getElementById('image'),
-      preview = document.getElementById('preview');
+    // Image Preview
+    const imageInput = document.getElementById('image');
+    const preview = document.getElementById('preview');
     imageInput.onchange = () => {
       const f = imageInput.files[0];
       if (f) preview.src = URL.createObjectURL(f);
     };
 
-    initDB().then(() => {});
+    // Database Init
+    initDB().then(() => { });
 
+    // Form Submission
     document.getElementById('entryForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const getPitch = (c) => [...c.children].map(r => ({
         set: parseFloat(r.querySelector('.pitch-set').value) || 0,
         turns: parseInt(r.querySelector('.pitch-turns').value) || 0,
@@ -301,15 +286,15 @@
 
       const file = imageInput.files[0];
       if (file) {
-        const rdr = new FileReader();
-        rdr.onload = (ev) => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
           data.imageData = ev.target.result;
           DB.add('windings', data);
           alert('✅ Entry saved successfully!');
           document.getElementById('entryForm').reset();
           preview.src = '';
         };
-        rdr.readAsDataURL(file);
+        reader.readAsDataURL(file);
       } else {
         DB.add('windings', data);
         alert('✅ Entry saved successfully!');
@@ -317,9 +302,11 @@
       }
     });
 
+    // Export Excel
     document.getElementById('exportBtn').addEventListener('click', async () => {
       const entries = DB.get('windings') || [];
       if (!entries.length) return alert('No entries to export.');
+
       const rows = entries.map(d => ({
         Date: d.date,
         Name: d.name,
@@ -327,10 +314,11 @@
         Running: d.runningPitches.map(p => `S:${p.set},T:${p.turns}`).join('; '),
         Created: d.createdAt
       }));
+
       const ws = XLSX.utils.json_to_sheet(rows);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Windings');
-      XLSX.writeFile(wb, 'windings_export_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+      XLSX.writeFile(wb, `windings_export_${new Date().toISOString().slice(0, 10)}.xlsx`);
     });
   </script>
 </body>

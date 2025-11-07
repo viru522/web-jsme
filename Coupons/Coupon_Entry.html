@@ -4,8 +4,9 @@
 <head>
   <meta charset="utf-8">
   <title>Add Coupon - JSME</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     :root {
       --primary: #b21f2d;
@@ -14,9 +15,9 @@
     body {
       background: #fafafa;
       font-family: "Roboto", sans-serif;
+      min-height: 100vh;
     }
 
-    /* Navbar */
     .navbar {
       background: var(--primary);
       padding: .8rem 1.2rem;
@@ -47,6 +48,7 @@
       font-weight: 500;
       border-radius: 6px;
       padding: 8px 12px !important;
+      transition: background .2s ease;
     }
 
     .navbar-nav .nav-link.active {
@@ -54,31 +56,31 @@
       color: var(--primary) !important;
     }
 
-    /* Form Card */
     .card {
-      max-width: 750px;
-      margin: 30px auto;
-      border-radius: 12px;
-      padding: 20px;
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: 14px;
+      padding: 2rem;
       background: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .btn-danger {
       background: var(--primary);
       border: none;
+      font-weight: 600;
+    }
+
+    .btn-danger:hover {
+      opacity: 0.9;
     }
 
     .save-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       background: #fff;
-      padding: 12px 16px;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      bottom: 0;
-      border-radius: 10px;
+      border-top: 1px solid #eee;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+      border-radius: 12px;
     }
   </style>
 </head>
@@ -86,80 +88,78 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <div class="logo">JSME</div>
-        <div style="line-height:1;">
-          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
-        </div>
-      </a>
-
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Winding/Stator_List.html">🌀 Stator</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
-          <li class="nav-item"><a class="nav-link active" href="../Coupons/Coupon_List.html">🎟️ Coupons</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
-        </ul>
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/main/index.html">
+      <div>
+        <img class="logo" src="/main/Asset/img-123.png" id="navbarLogo" width="50vh" height="50%" alt="Logo">
       </div>
-    </div>
-  </nav>
+      <span id="navbarName" class="fw-bold fs-6 text-white">JSM Electricals</span>
+    </a>
 
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="../Dashboard/index.html">🏠 Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Customer/Customer_Entry.html">➕ Add Customer</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../Billing/Billing_List.html">🧾 Billing</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Winding/Stator_List.html">🌀 Stator</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Coupons/Coupon_List.html">🎟️ Coupons</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
   <!-- Coupon Form -->
-  <main>
+  <main class="container my-4">
     <div class="card">
-      <h4 class="mb-3 text-primary">🎟️ Add / Edit Coupon</h4>
-      <form id="couponForm">
+      <h4 class="fw-bold text-danger mb-3">🎟️ Add / Edit Coupon</h4>
+      <form id="couponForm" novalidate>
         <div class="mb-3">
           <label class="form-label">Coupon Code *</label>
-          <input id="code" class="form-control" required placeholder="e.g., SAVE10">
+          <input id="code" name="code" class="form-control" required placeholder="e.g., SAVE10">
         </div>
 
         <div class="row g-3 mb-3">
-          <div class="col-md-6">
+          <div class="col-12 col-md-6">
             <label class="form-label">Discount (%) *</label>
-            <input id="discount" type="number" class="form-control" required placeholder="e.g., 10">
+            <input id="discount" name="discount" type="number" class="form-control" required placeholder="e.g., 10">
           </div>
-          <div class="col-md-6">
+          <div class="col-12 col-md-6">
             <label class="form-label">Max Discount (₹)</label>
-            <input id="maxDiscount" type="number" class="form-control" placeholder="e.g., 100">
+            <input id="maxDiscount" name="maxDiscount" type="number" class="form-control" placeholder="e.g., 100">
           </div>
         </div>
 
         <div class="row g-3 mb-3">
-          <div class="col-md-6">
+          <div class="col-12 col-md-6">
             <label class="form-label">Valid Till *</label>
-            <input id="validTill" type="date" class="form-control" required>
+            <input id="validTill" name="validTill" type="date" class="form-control" required>
           </div>
-          <div class="col-md-6">
+          <div class="col-12 col-md-6">
             <label class="form-label">Minimum Order (₹)</label>
-            <input id="minOrder" type="number" class="form-control" placeholder="e.g., 500">
+            <input id="minOrder" name="minOrder" type="number" class="form-control" placeholder="e.g., 500">
           </div>
         </div>
 
-        <div class="save-bar">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center save-bar gap-3 mt-4">
           <small class="text-muted">Coupons stored locally (demo mode)</small>
-          <button class="btn btn-danger" type="submit">💾 Save Coupon</button>
+          <button class="btn btn-danger w-100 w-md-auto" type="submit">💾 Save Coupon</button>
         </div>
       </form>
     </div>
   </main>
 
-  <!-- Script -->
+  <!-- JS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("couponForm");
@@ -182,6 +182,7 @@
       form.addEventListener("submit", e => {
         e.preventDefault();
         const coupons = JSON.parse(localStorage.getItem("coupons")) || [];
+
         const data = {
           id: editCoupon ? editCoupon.id : Date.now(),
           code: form.code.value.trim().toUpperCase(),
@@ -192,14 +193,19 @@
           createdAt: new Date().toISOString()
         };
 
+        if (!data.code || data.discount <= 0) {
+          alert("⚠ Please enter a valid coupon code and discount.");
+          return;
+        }
+
         if (editCoupon) {
           const idx = coupons.findIndex(c => c.id === editCoupon.id);
           if (idx !== -1) coupons[idx] = data;
           localStorage.removeItem("editCoupon");
-          alert("✅ Coupon updated!");
+          alert("✅ Coupon updated successfully!");
         } else {
           coupons.push(data);
-          alert("✅ Coupon added!");
+          alert("✅ Coupon added successfully!");
         }
 
         localStorage.setItem("coupons", JSON.stringify(coupons));

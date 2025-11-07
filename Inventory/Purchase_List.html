@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <title>Purchase List - JSME</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="../css/style.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
@@ -15,14 +14,13 @@
 
     body {
       background: #fafafa;
-      margin: 0;
       font-family: "Roboto", sans-serif;
     }
 
     /* Navbar */
     .navbar {
       background: var(--primary);
-      padding: 0.7rem 1.2rem;
+      padding: 0.7rem 1rem;
     }
 
     .navbar-brand {
@@ -36,7 +34,6 @@
       background: #fff;
       color: var(--primary);
       font-weight: 800;
-      font-size: 18px;
       border-radius: 10px;
       width: 45px;
       height: 45px;
@@ -49,129 +46,43 @@
     .navbar-nav .nav-link {
       color: #fff !important;
       font-weight: 500;
-      margin-right: 8px;
       border-radius: 6px;
-      transition: background 0.2s;
       padding: 8px 12px !important;
-    }
-
-    .navbar-nav .nav-link:hover {
-      background: rgba(255, 255, 255, 0.2);
+      transition: 0.2s;
     }
 
     .navbar-nav .nav-link.active {
       background: #fff;
       color: var(--primary) !important;
-      font-weight: 600;
     }
 
-    /* Page Styling */
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 10px;
-    }
-
+    /* Page */
     .card {
       background: #fff;
-      border-radius: 12px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .header-bar h4 {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .table-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .table-toolbar input {
-      flex: 1;
-      min-width: 220px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 8px 12px;
-    }
-
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
     }
 
     .table thead th {
       background: #fbeaea;
       color: #333;
       font-weight: 600;
-      text-align: left;
-      padding: 10px;
-    }
-
-    .table tbody td {
-      padding: 10px;
-      border-top: 1px solid #eee;
-      vertical-align: middle;
+      text-transform: uppercase;
+      font-size: 13px;
     }
 
     .table tbody tr:hover {
       background: #fff7f7;
     }
 
-    .btn {
-      cursor: pointer;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      padding: 8px 14px;
-      transition: 0.2s;
-    }
-
-    .btn-danger {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .btn-outline-danger {
-      background: #fff;
-      color: var(--primary);
-      border: 1px solid var(--primary);
-    }
-
-    .btn-outline-danger:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .btn-sm {
-      padding: 4px 8px;
-      font-size: 13px;
-      border-radius: 6px;
-    }
-
     .status {
       display: inline-block;
       padding: 3px 8px;
       border-radius: 8px;
-      color: #fff;
       font-weight: 600;
       font-size: 12px;
+      color: #fff;
     }
 
     .status-received {
@@ -182,20 +93,10 @@
       background: var(--primary);
     }
 
-    @media (max-width: 700px) {
-      .header-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .table-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .btn {
-        width: 100%;
-      }
+    footer {
+      text-align: center;
+      color: #999;
+      margin-top: 25px;
     }
   </style>
 </head>
@@ -205,15 +106,14 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <div class="logo">JSME</div>
-        <div style="line-height:1;">
-          <div style="font-weight:700;color:#fff;">JSM Electricals</div>
+      <a class="navbar-brand" href="/main/index.html">
+        <div>
+          <img class="logo" src="/main/Asset/img-123.png" id="navbarLogo" alt="Logo">
         </div>
+        <span id="navbarName" class="fw-bold fs-6 text-white">JSM Electricals</span>
       </a>
 
-      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -224,33 +124,39 @@
           <li class="nav-item"><a class="nav-link" href="../Customer/Customer_List.html">👥 Customers</a></li>
           <li class="nav-item"><a class="nav-link" href="../Billing/Billing_List.html">🧾 Billing</a></li>
           <li class="nav-item"><a class="nav-link" href="../Winding/Data_List.html">⚙️ Winding</a></li>
-
-          <!-- Stator Section -->
-          <li class="nav-item"><a class="nav-link active" href="../Winding/Stator_List.html">🌀 Stator</a></li>
-
+          <li class="nav-item"><a class="nav-link" href="../Winding/Stator_List.html">🌀 Stator</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Stock_List.html">📦 Stock</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
+          <li class="nav-item"><a class="nav-link active" href="../Inventory/Purchase_List.html">🛒 Purchase</a></li>
           <li class="nav-item"><a class="nav-link" href="../Inventory/Sale_List.html">💼 Sales</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Offers/Offer_List.html">🎁 Offers</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Coupons/Coupon_List.html">🎟️ Coupons</a></li>
           <li class="nav-item"><a class="nav-link" href="../Auth/System.html">⚙️ Settings</a></li>
         </ul>
       </div>
     </div>
   </nav>
-  <!-- Content -->
-  <div class="container">
+
+  <!-- Page Content -->
+  <main class="container my-4">
     <div class="card">
-      <div class="header-bar">
-        <h4>📦 Purchase Records</h4>
-        <a href="Purchase_Entry.html" class="btn btn-outline-danger">+ Add Purchase</a>
+      <!-- Header Bar -->
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-3">
+        <div>
+          <h4 class="fw-bold text-danger mb-1">📦 Purchase Records</h4>
+          <p class="text-muted small mb-0">Manage all supplier and purchase transactions</p>
+        </div>
+        <a href="Purchase_Entry.html" class="btn btn-outline-danger fw-semibold">+ Add Purchase</a>
       </div>
 
-      <div class="table-toolbar">
-        <input type="text" id="searchInput" placeholder="🔍 Search by supplier or item...">
-        <button id="exportBtn" class="btn btn-outline-danger">📤 Export</button>
+      <!-- Toolbar -->
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-stretch align-items-sm-center gap-2 mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="🔍 Search by supplier or item...">
+        <button id="exportBtn" class="btn btn-outline-danger fw-semibold">📤 Export</button>
       </div>
 
+      <!-- Table -->
       <div class="table-responsive">
-        <table class="table" id="purchaseTable">
+        <table class="table align-middle" id="purchaseTable">
           <thead>
             <tr>
               <th>Date</th>
@@ -259,135 +165,120 @@
               <th>Qty</th>
               <th>Total</th>
               <th>Status</th>
-              <th style="text-align:center;">Actions</th>
+              <th class="text-center">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>2025-11-05</td>
-              <td>ABC Traders</td>
-              <td>Fan Motor</td>
-              <td>10</td>
-              <td>₹8,000</td>
-              <td><span class="status status-received">Received</span></td>
-              <td style="text-align:center;">
-                <button class="btn btn-sm btn-outline-danger">✏️</button>
-                <button class="btn btn-sm btn-danger">🗑</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const tableBody = document.querySelector("#purchaseTable tbody");
-        const searchInput = document.getElementById("searchInput");
-        const exportBtn = document.getElementById("exportBtn");
+    <footer class="small text-muted mt-4 text-center">© 2008 Jai Santoshi Mata Electrical</footer>
+  </main>
 
-        let purchaseList = JSON.parse(localStorage.getItem("purchaseList")) || [];
-        renderTable(purchaseList);
-
-        // Render Table
-        function renderTable(data) {
-          tableBody.innerHTML = "";
-
-          if (data.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-muted">No purchase records found.</td></tr>`;
-            return;
-          }
-
-          data.forEach((item) => {
-            const tr = document.createElement("tr");
-            const total = parseFloat(item.total || 0).toFixed(2);
-            tr.innerHTML = `
-        <td>${item.date}</td>
-        <td>${item.supplier}</td>
-        <td>${item.item}</td>
-        <td>${parseFloat(item.qty).toFixed(2)}</td>
-        <td>₹${total}</td>
-        <td><span class="status ${item.status === "Received" ? "status-received" : "status-pending"}">${item.status}</span></td>
-        <td style="text-align:center;">
-          <button class="btn btn-sm btn-outline-primary edit-btn" data-id="${item.id}">✏️</button>
-          <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${item.id}">🗑</button>
-        </td>
-      `;
-            tableBody.appendChild(tr);
-          });
-
-          attachHandlers();
-          updateSummary(data);
-        }
-
-        // Edit + Delete handlers
-        function attachHandlers() {
-          document.querySelectorAll(".edit-btn").forEach(btn => {
-            btn.addEventListener("click", function () {
-              const id = this.getAttribute("data-id");
-              const record = purchaseList.find(p => p.id == id);
-              if (record) {
-                localStorage.setItem("editPurchase", JSON.stringify(record));
-                window.location.href = "Purchase_Entry.html";
-              }
-            });
-          });
-
-          document.querySelectorAll(".delete-btn").forEach(btn => {
-            btn.addEventListener("click", function () {
-              const id = this.getAttribute("data-id");
-              if (!confirm("Delete this purchase record?")) return;
-              purchaseList = purchaseList.filter(p => p.id != id);
-              localStorage.setItem("purchaseList", JSON.stringify(purchaseList));
-              renderTable(purchaseList);
-            });
-          });
-        }
-
-        // Search filter
-        searchInput.addEventListener("input", (e) => {
-          const q = e.target.value.toLowerCase();
-          const filtered = purchaseList.filter(
-            p =>
-              p.supplier.toLowerCase().includes(q) ||
-              p.item.toLowerCase().includes(q)
-          );
-          renderTable(filtered);
-        });
-
-        // Export to Excel
-        exportBtn.addEventListener("click", () => {
-          if (purchaseList.length === 0) return alert("No data to export.");
-          const worksheet = XLSX.utils.json_to_sheet(purchaseList);
-          const workbook = XLSX.utils.book_new();
-          XLSX.utils.book_append_sheet(workbook, worksheet, "Purchase Records");
-          XLSX.writeFile(workbook, "purchase_records.xlsx");
-        });
-
-        // Footer summary
-        function updateSummary(data) {
-          let footer = document.querySelector("#summaryRow");
-          if (!footer) {
-            const tfoot = document.createElement("tfoot");
-            tfoot.innerHTML = `<tr><td colspan="7" id="summaryRow" class="text-center fw-bold text-dark"></td></tr>`;
-            document.querySelector("#purchaseTable").appendChild(tfoot);
-            footer = document.querySelector("#summaryRow");
-          }
-
-          const totalQty = data.reduce((sum, i) => sum + (parseFloat(i.qty) || 0), 0);
-          const totalValue = data.reduce((sum, i) => sum + (parseFloat(i.total) || 0), 0);
-          const uniqueSuppliers = new Set(data.map(i => i.supplier)).size;
-
-          footer.textContent = `TOTAL PURCHASES: ${data.length} | TOTAL QTY: ${totalQty.toFixed(2)} | TOTAL VALUE: ₹${totalValue.toFixed(2)} | UNIQUE SUPPLIERS: ${uniqueSuppliers}`;
-        }
-      });
-    </script>
-
-    <footer class="app-footer text-center text-muted my-3">© 2008 Jai Santoshi Mata Electrical</footer>
-  </div>
-
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tableBody = document.querySelector("#purchaseTable tbody");
+      const searchInput = document.getElementById("searchInput");
+      const exportBtn = document.getElementById("exportBtn");
+
+      let purchaseList = JSON.parse(localStorage.getItem("purchaseList")) || [];
+      renderTable(purchaseList);
+
+      // Render Table
+      function renderTable(data) {
+        tableBody.innerHTML = "";
+
+        if (data.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-3">No purchase records found.</td></tr>`;
+          return;
+        }
+
+        data.forEach((item) => {
+          const tr = document.createElement("tr");
+          const total = parseFloat(item.total || 0).toFixed(2);
+          tr.innerHTML = `
+            <td>${item.date}</td>
+            <td>${item.supplier}</td>
+            <td>${item.item}</td>
+            <td>${parseFloat(item.qty).toFixed(2)}</td>
+            <td>₹${total}</td>
+            <td><span class="status ${item.status === "Received" ? "status-received" : "status-pending"}">${item.status}</span></td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-outline-primary edit-btn" data-id="${item.id}">✏️</button>
+              <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${item.id}">🗑</button>
+            </td>
+          `;
+          tableBody.appendChild(tr);
+        });
+
+        attachHandlers();
+        updateSummary(data);
+      }
+
+      // Edit + Delete Handlers
+      function attachHandlers() {
+        document.querySelectorAll(".edit-btn").forEach(btn => {
+          btn.addEventListener("click", function () {
+            const id = this.dataset.id;
+            const record = purchaseList.find(p => p.id == id);
+            if (record) {
+              localStorage.setItem("editPurchase", JSON.stringify(record));
+              window.location.href = "Purchase_Entry.html";
+            }
+          });
+        });
+
+        document.querySelectorAll(".delete-btn").forEach(btn => {
+          btn.addEventListener("click", function () {
+            const id = this.dataset.id;
+            if (!confirm("Delete this purchase record?")) return;
+            purchaseList = purchaseList.filter(p => p.id != id);
+            localStorage.setItem("purchaseList", JSON.stringify(purchaseList));
+            renderTable(purchaseList);
+          });
+        });
+      }
+
+      // Search
+      searchInput.addEventListener("input", (e) => {
+        const q = e.target.value.toLowerCase();
+        const filtered = purchaseList.filter(
+          p => p.supplier.toLowerCase().includes(q) || p.item.toLowerCase().includes(q)
+        );
+        renderTable(filtered);
+      });
+
+      // Export Excel
+      exportBtn.addEventListener("click", () => {
+        if (purchaseList.length === 0) return alert("No data to export.");
+        const sheet = XLSX.utils.json_to_sheet(purchaseList);
+        const book = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(book, sheet, "Purchases");
+        XLSX.writeFile(book, "Purchase_List.xlsx");
+      });
+
+      // Summary Footer
+      function updateSummary(data) {
+        let tfoot = document.querySelector("#summaryRow");
+        if (!tfoot) {
+          const footerRow = document.createElement("tfoot");
+          footerRow.innerHTML = `<tr><td colspan="7" id="summaryRow" class="fw-bold text-center text-dark py-2"></td></tr>`;
+          document.querySelector("#purchaseTable").appendChild(footerRow);
+          tfoot = document.querySelector("#summaryRow");
+        }
+
+        const totalQty = data.reduce((sum, i) => sum + (parseFloat(i.qty) || 0), 0);
+        const totalValue = data.reduce((sum, i) => sum + (parseFloat(i.total) || 0), 0);
+        const suppliers = new Set(data.map(i => i.supplier)).size;
+
+        tfoot.textContent = `Total Records: ${data.length} | Total Qty: ${totalQty.toFixed(2)} | Total Value: ₹${totalValue.toFixed(2)} | Unique Suppliers: ${suppliers}`;
+      }
+    });
+  </script>
+</body>
 </html>
